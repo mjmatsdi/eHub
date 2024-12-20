@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="sMsg_Process_Queue" Id="{7d194d20-389a-4c1b-90a1-7b948162beef}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION sMsg_Process_Queue : BOOL
+VAR_IN_OUT
+    pBuffer   : ST_Msg_Buffer;
+END_VAR
+VAR
+    str       			:STRING;
+    index     			:UDINT;
+	temp_buff			:STRING(4000);
+	msg_len				:UDINT;
+	free_space			:UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[free_space := 4000 - LEN2(ADR(pBuffer.Pending));
+
+//When there is data to work with and more than 10% free space, spin.
+WHILE (pBuffer.MsgQ.Queue.Position[IDX1].HasData) AND (free_space > 400) DO
+	// now make sure the new message will fit into whatever remaining space is in the pending buffer
+	msg_len := LEN2(ADR(pBuffer.MsgQ.Queue.Position[IDX1].BufferString));
+	free_space := 4000 - LEN2(ADR(pBuffer.Pending));
+	
+	IF msg_len < free_space THEN
+		
+		concat2(ADR(pBuffer.Pending), ADR(pBuffer.MsgQ.Queue.Position[IDX1].BufferString), ADR(pBuffer.Pending), SIZEOF(pBuffer.Pending));
+		
+		//cycle the stack
+		pBuffer.MsgQ.QueueWorker.ShiftPositionArray(1);
+	ELSE
+		free_space := 0;
+	END_IF
+END_WHILE
+]]></ST>
+    </Implementation>
+    <LineIds Name="sMsg_Process_Queue">
+      <LineId Id="42" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="29" Count="5" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

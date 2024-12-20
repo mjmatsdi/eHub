@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <DUT Name="E_LabelStatus" Id="{29845f41-6a2f-4151-a8ce-dd10888dde9f}">
+    <Declaration><![CDATA[//{attribute 'qualified_only'}
+//{attribute 'strict'}
+TYPE E_LabelStatus :
+(
+	Good 		:= 0,
+	LoBoy 		:= 1,
+	NoData		:= 2,
+	DataError	:= 3
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

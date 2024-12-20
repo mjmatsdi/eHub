@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_IoDevice_ConnectionType" Id="{6ea74376-0680-4dae-ac71-c40e62f0a732}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_IoDevice_ConnectionType :
+(
+    None := 0,              // the connection state is ignored (always FALSE)
+	Strict := 1,            // the connection state can never vary 
+    Timed := 2              // the connection is OFF if the timeout is violated
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

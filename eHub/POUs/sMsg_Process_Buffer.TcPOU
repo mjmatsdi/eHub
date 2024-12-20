@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="sMsg_Process_Buffer" Id="{fdccdcbe-c5a8-4c31-92e6-7e0bd34d7c67}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION sMsg_Process_Buffer : BOOL
+VAR_IN_OUT
+    pBuffer   : ST_Msg_Buffer;
+END_VAR
+VAR
+    ptr     :UDINT;
+    len     :UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF pBuffer.Ack THEN
+    pBuffer.Ack := FALSE;
+    pBuffer.Ready := FALSE;
+    pBuffer.Sending[IDX0] := 0;    // effectively indicates the buffer is empty
+    pBuffer.WatchDogTmr := 0;
+	pBuffer.Stats.ACKcnt := pBuffer.Stats.ACKcnt + 1;
+	IF (pBuffer.Stats.ACKcnt >= 2147483500) THEN
+		pBuffer.Stats.ACKcnt := 1;
+	END_IF
+	
+END_IF
+
+// if there is something pending and the sending is empty...
+IF pBuffer.Pending[IDX0] > 0 AND pBuffer.Sending[IDX0] = 0 THEN
+    // ... transfer pending to sending
+    ptr := 0;
+    WHILE pBuffer.Pending[ptr] > 0 AND ptr < 4000 DO
+        pBuffer.Sending[ptr] := pBuffer.Pending[ptr];
+        pBuffer.Pending[ptr] := 0;      // erase as we go along
+        ptr := ptr + 1;
+	END_WHILE
+    pBuffer.Sending[ptr] := 0;   // don't forget to zero terminate the string
+    
+	pBuffer.Stats.RDYcnt := pBuffer.Stats.RDYcnt + 1;
+	IF (pBuffer.Stats.RDYcnt >= 2147483500) THEN
+		pBuffer.Stats.RDYcnt := 1;
+	END_IF
+	pBuffer.Ready := TRUE;
+    pBuffer.WatchDogTmr := 0;     // time how long it takes to pick up this msg
+END_IF
+//(* removing the watchdog per Mike Higleys request. He states that toggling the Ready bit messes with the services - mjm
+// if the sending buffer is active with data... 
+IF pBuffer.Sending[IDX0] > 0 THEN
+    // time how long until it's picked up
+    pBuffer.WatchDogTmr := pBuffer.WatchDogTmr + 1;
+    // if not within the timeout...   (25 = 100ms)
+    IF pBuffer.WatchDogTmr = 25 THEN
+        // toggle the Ready bit OFF
+        pBuffer.Ready := FALSE;
+		pBuffer.Stats.WatchdofTimeoutCnt := pBuffer.Stats.WatchdofTimeoutCnt + 1;
+	END_IF
+    IF pBuffer.WatchDogTmr = 51 THEN
+        pBuffer.Ready := TRUE;
+        pBuffer.WatchDogTmr := 0;
+	END_IF
+END_IF
+//*)
+]]></ST>
+    </Implementation>
+    <LineIds Name="sMsg_Process_Buffer">
+      <LineId Id="80" Count="9" />
+      <LineId Id="91" Count="12" />
+      <LineId Id="105" Count="3" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="109" Count="10" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="120" Count="6" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

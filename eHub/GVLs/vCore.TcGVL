@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <GVL Name="vCore" Id="{b473311d-eb4e-4ae9-b84d-356165db271d}">
+    <Declaration><![CDATA[//{attribute 'qualified_only'}
+VAR_GLOBAL
+
+    SCP                                 :ST_SCP;
+    
+	i									:INT;
+    j									:DINT;
+	
+	// Input processing
+    InputAr                             :ARRAY[0..CORE_MAXDIGITALINPUTS] OF UINT;	// this must start at [0]
+	InputAr_DebOn						:ARRAY[0..CORE_MAXDIGITALINPUTS] OF INT;	// this must start at [0]
+	InputAr_DebOff						:ARRAY[0..CORE_MAXDIGITALINPUTS] OF INT;	// this must start at [0]
+	InputAr_GlitchLimit					:ARRAY[0..CORE_MAXDIGITALINPUTS] OF INT;	// this must start at [0]
+    //InputAr_Config                      :ARRAY[1..CORE_MAXDIGITALINPUTS] OF ST_InputAr_Config;
+	
+    InputAr_RemoveAllForces             :BOOL := 0;	
+    InputAr_Count                       :INT;
+	InputRuntimeAr						:ARRAY[0..CORE_MAXDIGITALINPUTS] OF UINT;
+    AInputAr                            :ARRAY[0..CORE_MAXANALOGINPUTS] OF UDINT;
+
+    FindInput                           :BOOL;
+    FindInputAr                         :ARRAY[1..10] OF UINT;
+    FindInput_ptr                       :INT;
+
+	ForcesIn							:ARRAY[0..MaxForceCollection] OF INT;
+	ForcesOut							:ARRAY[0..MaxForceCollection] OF INT;
+	ForcesMotor							:ARRAY[0..MaxForceCollection] OF INT;
+	
+	IODeviceAr							:ARRAY[0..CORE_MAXPLCDEVICES] OF ST_IODevice;
+	IODevice_Count						:INT;
+	
+    // Scope
+    //Scope								:ST_ScopeAr;
+    
+    // Output processing
+    OutputAr                            :ARRAY[0..CORE_MAXDIGITALOUTPUTS] OF UINT;	// this must start at [0]
+    OutputAr_RemoveAllForces            :BOOL := 0;
+    OutputAr_Count                      :INT;
+	OutputRuntimeAr                     :ARRAY[0..CORE_MAXDIGITALOUTPUTS] OF UINT;
+    AOutputAr                           :ARRAY[0..CORE_MAXANALOGOUTPUTS] OF UDINT;
+    StaticOutputAr                      :ARRAY[0..CORE_MAXSTATICOUTPUTS] OF ST_StaticOutput;
+    StaticOutputAr_Count                :INT;
+    
+	HornAr_Count                        :UINT;
+	HornAr                              :ARRAY[0..CORE_MAXHORNS] OF ST_HornLightAr;
+	LightAr_Count                       :UINT;
+	LightAr                             :ARRAY[0..CORE_MAXLIGHTS] OF ST_HornLightAr;
+	MultiLightAr_Count					:UINT;
+	MultiLightAr						:ARRAY[0..CORE_MAXMULTILIGHTS] OF ST_MultiLightAr;	
+    OutDepAr_Count                      :UINT;
+    OutDepAr                            :ARRAY[0..CORE_MAXDEPOUTPUTS] OF ST_OutDepOutAr;
+	EncAr_Count                         :UINT;
+    EncAr                               :ARRAY[0..CORE_MAXENCODERS] OF ST_EncAr;
+	
+	ScanAr_Count                        :INT;
+    ScanAr                              :ARRAY[0..CORE_MAXSCANNERS] OF ST_ScanAr;
+	ScanAr_ManualPurge					:ARRAY[0..CORE_MAXSCANNERS] OF BOOL;
+
+
+	StationUser							:ARRAY[0..13] OF ST_User;
+	
+END_VAR
+
+
+VAR_GLOBAL CONSTANT
+
+	InBit_LE                    :INT := 0;
+	InBit_Present               :INT := 1;
+	InBit_Latch                 :INT := 2;
+	InBit_TE                    :INT := 3;
+    InBit_DetectState           :INT := 4;
+    InBit_ForceState            :INT := 5;
+    InBit_Forced                :INT := 6;	
+
+   	OutBit_State                :INT := 0;    
+	OutBit_Voltage              :INT := 1;
+    OutBit_OnIsLow              :INT := 2;
+    OutBit_Forced               :INT := 3;
+    OutBit_ForceState           :INT := 4;
+
+	ScanError_WriteFailure		:INT := 0;
+	ScanError_ReadFailure 		:INT := 1;
+	ScanError_DeviceFailure 	:INT := 2;
+	ScanError_Timeout 			:INT := 3;
+	ScanError_BadData 			:INT := 4;
+	ScanError_LabelSize			:INT := 5;			// The size of a label is larger than a Label field can hold. Increase the label buffer size.
+	ScanLabel_NoDest			:STRING := '0';
+	ScanLabel_Overflow			:STRING := '-';
+    
+	ErrBit_Overflow				:INT := 0;			// one of the msg buffers has overflowed
+	ErrBit_Heartbeat			:INT := 1;
+	ErrBit_NoCtnSlots			:INT := 2;			// ctn.Carton[] slots are all being used
+	ErrBit_ArrayViolation		:INT := 3;			// array bounds violation in the configuration
+	ErrBit_LinkLoss_DB2ADS		:INT := 4;			// DB2ADS Service has lost connectivity to database
+	ErrBit_LinkLoss_ADS2DB		:INT := 5;			// ADS2DB Service has lost connectivity to database
+	ErrBit_NoJams				:INT := 6;			// no jams defined. we should at least have an e-stop as a jam so a "no-jam" configuration is not valid. 
+	
+	MaxForceCollection			:INT := 100;
+END_VAR
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

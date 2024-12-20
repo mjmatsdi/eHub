@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="P800_Core_Messaging" Id="{ae625f7e-0929-4f56-bdd1-e329f26ca566}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P800_Core_Messaging
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// if flag goes high from service set it low and bump counter
+IF (vMessages.SQL_ExceptionFlag > 0) THEN
+	vMessages.SQL_ExceptionFlag :=0;
+	vMessages.SQL_ExceptionCount := SQL_ExceptionCount + 1;	
+	// cap exception count
+	IF (vMessages.SQL_ExceptionCount > 10001 )THEN
+		vMessages.SQL_ExceptionCount := 10001;
+	END_IF	
+END_IF
+
+
+IF SCP.DisableMessaging THEN
+	RETURN;
+END_IF
+
+// Process whatever buffers you want here
+sMsg_Process_Buffer(Msgs_SCP);      // generic SCP message buffer
+sMsg_Process_Buffer(Msgs_Itm);      // Itmsort SCP message buffer
+sMsg_Process_Buffer(Msgs_Ind);      // Itmsort FAST SCP message buffer
+sMsg_Process_Buffer(Msgs_Log);      // Multithreaded, used for silent messages/heartbeat
+]]></ST>
+    </Implementation>
+    <LineIds Name="P800_Core_Messaging">
+      <LineId Id="57" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="53" Count="2" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="46" Count="1" />
+      <LineId Id="33" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

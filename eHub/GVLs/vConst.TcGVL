@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <GVL Name="vConst" Id="{645fbfea-4ec9-4c77-8346-7ff7404af7f1}">
+    <Declaration><![CDATA[//
+// This is an IOBuilder generated file
+//
+//      --- DO NOT EDIT OR OTHERWISE MODIFY THIS FILE ---
+//
+// Any future re-build will wipe out custom changes!
+// If needed, create a new GVL or modify the PLCConstants table.
+//
+{attribute 'global_init_slot' := '40001'}
+VAR_GLOBAL CONSTANT
+	CB_MAXCARPLC                      :SINT := 1;
+    CONV_MAXAXIS                      :INT := 1;       
+    CONV_MAXBODICOPS                  :INT := 1;       
+    CONV_MAXCTRLSTATIONS              :INT := 10;      
+    CONV_MAXEMS                       :INT := 1;       // vConv.EmsAr[1..CONV_MAXMOTORS] OF ST_EMS
+    CONV_MAXEMSINPUTS                 :INT := 6;       
+	CONV_MAXSLUGDETECT       		  :INT := 50;
+    CONV_MAXFLOWCTRL                  :INT := 50;      
+    CONV_MAXGAPPERANALOG              :INT := 1;       // vConv.GapAnalog[1..CONV_MAXGAPPERANALOG] OF FB_Gapper_Analog
+    CONV_MAXGAPPERPRESYNC             :INT := 1;       // vConv.GapPreSync[1..CONV_MAXGAPPERPRESYNC] OF FB_Gapper_PreSync
+    CONV_MAXGAPPERQUE                 :INT := 20;      // Max number of cartons to track per gapper sync lane.
+    CONV_MAXGAPPERS                   :INT := 5;       
+    CONV_MAXIDXSLUGS                  :INT := 6;       
+    CONV_MAXINVERTERS                 :INT := 100;     
+    CONV_MAXJAMS                      :INT := 100;     
+    CONV_MAXJAMZONES                  :INT := 20;      
+    CONV_MAXMOTORDEPOUT               :INT := 1;       
+    CONV_MAXMOTORDEPS                 :INT := 1;       // vConv.MotorDepAr[1..CONV_MAXMOTORDEPS] OF ST_MotorDepAr
+    CONV_MAXMOTORS                    :INT := 100;     
+    CONV_MAXOILERS                    :INT := 5;       
+    CONV_MAXORPHANS                   :INT := 80;      
+    CONV_MAXSYSINFEEDS                :INT := 1;       
+    CONV_MAXTRAFFICCOP                :INT := 1;       
+    CONV_MAXZONEHORNS                 :INT := 5;       
+    CONV_MAXZONELIGHTS                :INT := 10;      
+    CONV_MAXZONES                     :INT := 6;       
+    CORE_MAXANALOGINPUTS              :INT := 100;     
+    CORE_MAXANALOGOUTPUTS             :INT := 100;     
+    CORE_MAXDEPOUTPUTS                :INT := 20;      
+    CORE_MAXDIGITALINPUTS             :INT := 1000;    
+    CORE_MAXDIGITALOUTPUTS            :INT := 1000;    
+    CORE_MAXENCODERS                  :INT := 20;      
+    CORE_MAXHORNS                     :INT := 20;      
+    CORE_MAXLCAR                      :INT := 12;      // :ARRAY[0..CORE_MAXLCAR] OF ST_LightCurtain
+    CORE_MAXLCI_EL6021                :INT := 4;       // :ARRAY[0..CORE_MAXLCI_EL6021] OF FB_BannerLightCurtain_EL6021_Quad
+    CORE_MAXLIGHTS                    :INT := 20;      
+    CORE_MAXMULTILIGHTS               :INT := 1;       // vCore.MultiLightAr[0..CORE_MAXMULTILIGHTS] OF ST_MultiLightAr
+    CORE_MAXPLCDEVICES                :INT := 1;       // vCore.IODeviceAr[1..CORE_MAXPLCDEVICES] OF ST_IODevice
+    CORE_MAXSCANNER_BUFFERLEN         :INT := 450;     
+    CORE_MAXSCANNERS                  :INT := 32;      
+    CORE_MAXSCANNERS_COGNEX           :INT := 1;       
+    CORE_MAXSCANNERS_COGNEXINSIGHT    :INT := 1;       
+    CORE_MAXSCANNERS_COGNEXSOFT       :INT := 1;       
+    CORE_MAXSCANNERS_DATALOGIC        :INT := 1;       
+    CORE_MAXSCANNERS_PHXGW            :INT := 1;
+	CORE_MAXSCANNERS_PHXRSSLICE		  :INT := 1;
+	CORE_MAXSCANNERS_BECKRSSLICE	  :INT := 1;
+    CORE_MAXSCANNERS_SICK             :INT := 1;       
+    CORE_MAXSCANNERS_SIM              :INT := 1;       
+    CORE_MAXSCANNERS_UDP              :INT := 1;
+	CORE_MAXSCANNERS_TCPCLIENT        :INT := 1;
+    CORE_MAXSTATICOUTPUTS             :INT := 1;
+    CORE_MAXSIMLABELS                 :INT := 1;       
+    CTN_MAXALTLANES                   :INT := 10;      
+    CTN_MAXASSIGNSLOTS                :INT := 300;     
+    CTN_MAXCARTONAR                   :INT := 3000;    // Max number of cartons that can be tracked across all sorters.
+    CTN_MAXDEVDIVERT                  :INT := 1;       // vCtn.Dev_Divert[1..CTN_MAXDEVDIVERT]
+    CTN_MAXDEVEND                     :INT := 1;       
+    CTN_MAXDEVENDDIV                  :INT := 1;       
+    CTN_MAXDEVICECARTONS              :INT := 500;     // vCtn.Device[].CartonList[CTN_MAXDEVICECARTONS]
+    CTN_MAXDEVICES                    :INT := 50;      
+    CTN_MAXDEVLETETRK                 :INT := 1;       // vCtn.Dev_LETETracking[1..CTN_MAXDEVLETETRK]
+    CTN_MAXDEVMDR2REG                 :INT := 1;       
+    CTN_MAXDEVRCVSCAN                 :INT := 1;       
+    CTN_MAXDEVSCALE                   :INT := 1;       
+    CTN_MAXDEVSCANNER                 :INT := 2;       
+    CTN_MAXDEVSFSTART                 :INT := 1;       
+    CTN_MAXDEVSFSWIN                  :INT := 1;       
+    CTN_MAXDEVSFSWOUT                 :INT := 1;       
+    CTN_MAXDEVSHOEINDUCT              :INT := 1;       
+    CTN_MAXDEVTRACKING                :INT := 1;       
+    CTN_MAXLANES                      :INT := 20;      
+    CTN_MAXSHOEDIVERTERS              :INT := 20;      
+    CTN_MAXSHOES                      :INT := 3000;    // Number of Shoes tracked on a shoe sorter. Arbitrary. Change in BluePaw (vConst.CTN_MAXSHOES) if y
+    CTN_MAXSORTERS                    :INT := 4;
+	IDX0                              :INT := 0;
+	IDX1                              :INT := 1;
+	IDX2                              :INT := 2;
+	IDX3                              :INT := 3;
+	IDX4                              :INT := 4;
+	IDX5                              :INT := 5;
+    IND_MAX_TRA                       :INT := 1;       // FB_DI_Instance.TRA_*_Ar[0..IND_MAXDIPKG]
+    IND_MAXDIINSTANCES                :INT := 1;       // vInd.DI[0..IND_MAXDIINSTANCES]
+    IND_MAXDIPKG                      :INT := 10;      // FB_DI_Instance.PKGAr[0..IND_MAXDIPKG]
+    IND_MAXDIZAR                      :INT := 1;       // vInd.DIZ[0..IND_MAXDIINSTANCES, 0..IND_MAXDIZAR]
+    IND_MAXLKDAR                      :INT := 1;       // vInd.LKDAr[0..IND_MAXDIINSTANCES, 0..IND_MAXLKDAR]
+    IND_MAXWIDPC                      :INT := 15;      // FB_DI_Instance.WID_PC_LOC_Ar[0..IND_MAXWIDPC]
+    ITM_MAXCSORTCHUTES                :INT := 1200;    
+    ITM_MAXDROPS                      :INT := 1;       // vItm.DropAr[1....ITM_MAXDROPS] OF ST_Itm_DropAr
+    ITM_MAXITEMDETECTPES              :INT := 10;      
+    ITM_MAXJAMBITSCLRDLIST            :INT := 32;      
+    ITM_MAXJAMZONES                   :INT := 20;      
+    ITM_MAXTUNEALIGNIDX1              :INT := 2000;    
+    ITM_MAXTUNEALIGNIDX2              :INT := 200;     
+    MDR_MAXBEDS                       :INT := 2000;    
+    MDR_MAXINBOUNDCTNS                :INT := 10;      // vMDR.Bed[].Cartons[1..MDR_MAXINBOUNDCTNS]
+    MDR_MAXLANEMAPS                   :INT := 10;      // Max lane mappings to a divert direction. See vMDR.Bed[].Lanes[1..3, MDR_MAXLANEMAPS]
+    MDR_MAXMERGES                     :INT := 1;       
+    MDR_MAXSLAVEDFWDOUTPUTS           :INT := 10;      // vMDR.Bed[].SlavedFwdOutputs[1..MDR_MAXSLAVEDFWDOUTPUTS]
+    MRG_MAXCOMBINER                   :INT := 1;       // vConv.CombinerMerge[1..MRG_MAXCOMBINER]
+    MRG_MAXINFEEDS                    :INT := 10;      
+    MRG_MAXMDRINFEEDS                 :INT := 2;       
+    MRG_MAXMDRMERGES                  :INT := 1;       
+    MRG_MAXMERGES                     :INT := 6;       
+    MRG_MAXRACETRACKS                 :INT := 6;       
+    MRG_MAXZIPPER                     :INT := 1;       // vConv.ZipperMerge[1..MRG_MAXZIPPER]
+    MRG_MAXZIPPERSLOTS                :INT := 1000;    
+    SF_MAXBLOCKVAL                    :INT := 1;       
+    SF_MAXEMPTY                       :INT := 1;       
+    SF_MAXEMPTYSWIN                   :INT := 1;       
+    SF_MAXINDUCT                      :INT := 1;       
+    SF_MAXPACK                        :INT := 1;       
+    SF_MAXSEP                         :INT := 1;       
+    SF_MAXSLUGGER                     :INT := 6;       
+    SF_MAXSWIN                        :INT := 1;       
+    SF_MAXSWINSLUG                    :INT := 500;     
+	SF_MAXUSW						  :INT := 1;
+	SF_MAXUASSIGNSLOTS				  :INT := 1000;  
+	PA_MAXPRINTER					  :INT := 1;					  
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

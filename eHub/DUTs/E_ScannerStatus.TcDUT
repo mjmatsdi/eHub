@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <DUT Name="E_ScannerStatus" Id="{30ed4dbe-2531-467e-837c-e3939188581f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_ScannerStatus :
+(
+	Offline := 0,
+	Online := 1,
+	Ready := 2,
+	Busy := 3,
+	Faulted := 4
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

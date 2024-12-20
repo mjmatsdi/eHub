@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_ScanAr" Id="{38327e57-3e58-4578-be9a-45f3f0a51fee}">
+    <Declaration><![CDATA[TYPE ST_ScanAr :
+STRUCT        
+	Delimiter			:INT;
+	ETX					:INT;
+	STX					:INT;	
+	NoReadChar			:INT;
+	ConflictChar		:INT;
+    IP					:STRING;	
+	OverflowLmt			:INT;	
+	Port				:INT;	
+	MaxLength			:INT;
+	Char1In				:INT;
+	Char1Out			:INT;
+	CxnState			:INT;
+	Fault				:INT;
+	SeqIn				:INT;
+	SeqOut				:INT;
+	LengthIn			:INT;
+	LengthOut			:INT;
+	TriggerOut			:INT;
+	Setting				:ARRAY[1..15] OF DINT;	
+	Typ					:E_ScannerType;
+	TypInst				:INT;
+	
+	Status				:E_ScannerStatus;
+	Result				:E_ScannerResult;
+	Purge				:BOOL;					// set to clear the scanner of all data
+	Busy				:BOOL;					// high on initial trigger, low when new sequence number arrives
+	Error				:BYTE;
+	HasLabels			:BOOL;
+    Label1				:STRING(450);
+	Label2				:STRING;
+	Label3				:STRING;
+	Label4				:STRING;
+	Label5				:STRING;
+	Label6				:STRING;	
+	LabelIn				:USINT;
+	LabelStatus			:E_LabelStatus;
+	NoLabelCnt			:INT;	
+	OverflowCnt			:INT;
+	PrevLabel           :STRING;
+	PrevBuffer     		:ARRAY[1..CORE_MAXSCANNER_BUFFERLEN] OF BYTE;		
+	Trigger				:BOOL;					// set high when scanner isn't busy to initiate a scan	
+	
+	TxBuffer			:STRING(250);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

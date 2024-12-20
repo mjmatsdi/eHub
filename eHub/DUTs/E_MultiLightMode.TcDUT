@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <DUT Name="E_MultiLightMode" Id="{4a0f36c2-43d7-4ea2-b770-0635d9a636f9}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_MultiLightMode :
+(
+	Off := 0,
+	Red := 1,
+	Yel := 2,
+	Grn := 3,
+	Blu := 4,
+	BlinkRed := 5,
+	BlinkYel := 6,
+	BlinkGrn := 7,
+	BlinkBlu := 8,
+	ChangeRedYel := 9,
+	ChangeRedGrn := 10,
+	ChangeRedBlu := 11,
+	ChangeYelGrn := 12,
+	ChangeYelBlu := 13,
+	ChangeGrnBlu := 14,
+	PulseRed := 15,
+	PulseYel := 16,
+	PulseGrn := 17 
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

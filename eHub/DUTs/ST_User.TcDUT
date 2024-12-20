@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="ST_User" Id="{443f761d-fa9a-4278-9ce4-3d38aaab5d64}">
+    <Declaration><![CDATA[TYPE ST_User :
+STRUCT
+	MaskStart		:STRING;
+	MaskEnd			:STRING;
+	Timeout			:INT := 3000;
+	
+	Enabled			:BOOL;
+	LoginState		:INT;
+	LoginUser		:STRING;
+	LoginRdy		:BOOL;
+		
+	User			:STRING;
+	GoodUser		:BOOL;
+	Tmr				:INT;
+	LightCycle		:INT;
+	LightTmr		:INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

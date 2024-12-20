@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_ScannerType" Id="{99fc25a1-59e0-4bbb-806c-84e5dcbe3056}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_ScannerType :
+(
+	RS232			:= 1,		// RS232 Port on an I/O station
+	GigE			:= 3,		// Gig-E camera
+	AxiomEIP		:= 4,		// Axiom scanner with EIP connection
+	SickEIP			:= 5,		// Sick scanner with a EIP
+	Anybus			:= 8,		// Scanner with an Anybus converter
+	SickEipCan		:= 10,		// Sick scanner with a EIP/Canbus connection
+	DataLogic		:= 11,		// DataLogix scanner with EIP connection
+	Turk			:= 12,		// Scanner connected to a Turck I/O station
+	CognexHard		:= 13,		// Cognex with EIP, hardware triggered by sensor
+	PhxGW			:= 14,		// Phoenix Contact ASCII-EIP Gateway
+	CognexSoft		:= 15,		// Cognex with EIP trigger
+	CognexInSight	:= 16,		// Cognex with EIP trigger
+	UDP				:= 17,		// UDP socket
+    Cognex90Buffer	:= 18,		// Cognex with EIP trigger - single buffer v90 update
+	TcpClient		:= 19,		// TCP client
+	PhxRsSlice		:= 21,		// Phoenix Contact Green RS232 or RS-485/422 slice
+	BeckRsSlice		:= 22,		// Beckhoff EL6001 RS-232 or EL6021 RS-422/485 slice
+	Sim				:= 99		// used for simulations
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

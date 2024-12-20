@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <DUT Name="E_EncoderType" Id="{ea436655-af92-46bb-a9f3-775a96cf0dbb}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_EncoderType :
+(
+    LETE            := 0,
+	LELE            := 1,
+	Quad            := 3,
+	PEP             := 4,
+	Timer           := 5,
+	Inc				:= 6
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

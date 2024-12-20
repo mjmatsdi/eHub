@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_BufferStats" Id="{6ce71074-ba6b-4897-806c-8d03fc807831}">
+    <Declaration><![CDATA[TYPE ST_BufferStats :
+STRUCT
+	RDYcnt : DINT;
+	ACKcnt : DINT;
+	WatchdofTimeoutCnt	:DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

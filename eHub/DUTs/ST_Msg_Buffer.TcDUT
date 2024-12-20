@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_Msg_Buffer" Id="{cae8df69-c45e-4640-9c72-79b19474932c}">
+    <Declaration><![CDATA[TYPE ST_Msg_Buffer :
+STRUCT
+    Pending         :STRING(4000);
+    Sending         :STRING(4000);
+    
+    Ready           :BOOL;
+    Ack             :BOOL;
+	//ADSPubThrottle			:BOOL := TRUE;
+	
+	OverflowCount	:UINT;
+    Stats			:ST_BufferStats;
+    WatchDogTmr     :INT;      // toggles the Ready bit in case OPC/ADS falls asleep on the job
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

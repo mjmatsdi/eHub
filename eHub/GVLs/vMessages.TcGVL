@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <GVL Name="vMessages" Id="{9573180b-33e7-4cb4-8c61-a5276c274eda}">
+    <Declaration><![CDATA[//{attribute 'qualified_only'}
+VAR_GLOBAL
+    Msgs_SCP                :ST_Msg_Buffer;
+    Msgs_Itm                :ST_Msg_Buffer;
+    Msgs_Ind				:ST_Msg_Buffer;
+	Msgs_Log				:ST_Msg_Buffer;
+	Msgs_Stat				:ST_Msg_Buffer;
+    
+    Msgs_Test_Num           :UINT;
+    
+    //------------------------------------------------------------------------------------------------------------------------
+    // Client Custom    10,000+
+	//MsgCode_Some_Client_Specific_Message			:DINT := 10001;
+	
+    //------------------------------------------------------------------------------------------------------------------------
+    // SCP level messages   0 - 49
+    MsgCode_SCP_Event                               :DINT := 1;
+    MsgCode_SCP_Heartbeat                           :DINT := 2;
+    MsgCode_SCP_Error                               :DINT := 4;
+    MsgCode_SCP_NeedConfig                          :DINT := 11;
+
+    MsgCode_IO_Scope                                :DINT := 20;
+	
+    //------------------------------------------------------------------------------------------------------------------------
+    // SCP level events   200 - 299
+    Evt_SCP_BadConfig_Trk							:DINT := 201;
+	Evt_SCP_BadConfig_Zone							:DINT := 202;
+	Evt_SCP_BadConfig_Mrg							:DINT := 203;
+	Evt_SCP_BadConfig_Gap							:DINT := 204;
+	Evt_SCP_BadConfig_MDR							:DINT := 205;
+	Evt_SCP_BadConfig_Scan							:DINT := 206;
+	Evt_SCP_BadConfig_LightBar						:DINT := 224;
+	Evt_SCP_BadConfig_Scale							:DINT := 219;
+	Evt_SCP_Heartbeat_StressTest					:DINT := 214; //There are other events defined in the EventDef table between 206-213
+	Evt_SCP_IsConfigured							:DINT := 216;
+    Evt_SCP_DeviceConnected                      	:DINT := 217;
+    Evt_SCP_DeviceDisconnected						:DINT := 218;
+
+    //------------------------------------------------------------------------------------------------------------------------
+    // Core component events   400 - 499
+	Evt_Core_EncoderFailure        					:DINT := 401;
+	Evt_IO_Glitch			      					:DINT := 402;
+	Evt_Core_EncoderIncFwdRollJmpBck				:DINT := 403;
+	Evt_Core_EncoderIncFwdJumpFwd					:DINT := 404;
+	Evt_Core_EncoderIncFwdRollXJmpZero				:DINT := 405;
+	Evt_Core_EncoderIncFwdRollJmpFwd				:DINT := 406;
+	Evt_Core_EncoderIncFwdXJmpZero					:DINT := 407;
+	Evt_Core_EncoderIncFwdJmpBck					:DINT := 408;
+	Evt_Core_EncoderIncBckJmpFwd					:DINT := 409;
+	Evt_Core_EncoderIncBckRollXJmpFwd				:DINT := 410;
+	Evt_Core_EncoderIncBckRollJmpFwd				:DINT := 411;
+	Evt_Core_EncoderIncBckXJmpZero					:DINT := 412;
+	Evt_Core_EncoderIncBckJmpBck					:DINT := 413;
+
+	Evt_Core_TcpSocket_Connected					:DINT := 420;
+	Evt_Core_TcpSocket_ConnFailed					:DINT := 421;
+	Evt_Core_TcpSocket_Closed						:DINT := 422;
+	Evt_Core_TcpSocket_SendFailed					:DINT := 423;
+	Evt_Core_TcpSocket_ReceiveFailed				:DINT := 424;
+	Evt_Core_TcpSocket_CloseError					:DINT := 425;
+	Evt_Core_TcpSocket_BufferFull					:DINT := 426;
+	
+	
+	//------------------------------------------------------------------------------------------------------------------------
+    // Conveyor Messages        = 50-99
+    MsgCode_Conv_ZoneStart                          :DINT := 50;
+    MsgCode_Conv_ZoneStop                           :DINT := 51;
+    MsgCode_Conv_ZoneJammed                         :DINT := 52;
+    MsgCode_Conv_JamStatus                          :DINT := 53;
+	MsgCode_Conv_ZipperMerge_Alignment				:DINT := 60;	
+    //------------------------------------------------------------------------------------------------------------------------
+    // Conveyor Events        = 50-99
+	Evt_Conv_SlugParams								:DINT := 220;
+	
+    //------------------------------------------------------------------------------------------------------------------------
+    // CtnSort messages (200-299)
+	MsgCode_Ctn_SorterError							:DINT := 200;
+    MsgCode_Ctn_DestReq            					:DINT := 201;
+	MsgCode_Ctn_Weight             					:DINT := 202;
+    MsgCode_Ctn_Confirm            					:DINT := 203;
+    MsgCode_Ctn_Recirc             					:DINT := 204;
+    MsgCode_Ctn_LaneStatus         					:DINT := 205;
+    MsgCode_Ctn_RcvScan            					:DINT := 206;
+	MsgCode_Ctn_Alignment          					:DINT := 210;
+    MsgCode_Ctn_PhasePerShoe       					:DINT := 211;
+    MsgCode_Ctn_ShoeDivertOffset   					:DINT := 212;
+    MsgCode_Ctn_GetSimLabels       					:DINT := 213;
+    MsgCode_Ctn_TrackingError      					:DINT := 214;
+    //------------------------------------------------------------------------------------------------------------------------
+    // CtnSort events (2000-2999)
+	//Codes currently same last 3 digits as v5.5, KU 7/20/18
+	Evt_Ctn_WeightNoLabel         					:DINT := 2004;
+	Evt_Ctn_WeightOverflow        					:DINT := 2005;
+	Evt_Ctn_RcvScanFailed         					:DINT := 2007;
+	Evt_Ctn_SorterStarted         					:DINT := 2008;
+	Evt_Ctn_SorterStopped         					:DINT := 2009;
+	Evt_Ctn_HostDestRedirect      					:DINT := 2010;
+	Evt_Ctn_CartonTooLong         					:DINT := 2011;
+	Evt_Ctn_InvalidAssignLost     					:DINT := 2012;
+	Evt_Ctn_InvalidAssignLane     					:DINT := 2013;
+	Evt_Ctn_InvalidAssignSeq      					:DINT := 2014;
+	Evt_Ctn_LateCartonAssign      					:DINT := 2015;
+	Evt_Ctn_UnexpectedCarton      					:DINT := 2016;
+	Evt_Ctn_TrackingErrLate       					:DINT := 2017;
+	Evt_Ctn_TrackingWarLate       					:DINT := 2018;
+	Evt_Ctn_TrackingErrEarly      					:DINT := 2019;
+	Evt_Ctn_TrackingWarEarly      					:DINT := 2020;
+	Evt_Ctn_MissingShoeDetect     					:DINT := 2021;
+	Evt_Ctn_ScannerOverflow       					:DINT := 2022;
+	Evt_Ctn_ScannerNoLabel        					:DINT := 2023;
+	Evt_Ctn_ScannerInvNewCarton   					:DINT := 2024;
+	Evt_Ctn_ScannerError							:DINT := 2025;
+
+
+    
+    //------------------------------------------------------------------------------------------------------------------------
+    // itmSort Messages     400 - 499
+    MsgCode_itm_Event           					:DINT := 401;
+    MsgCode_itm_Batch_Induct    					:DINT := 402;
+    MsgCode_itm_Divert          					:DINT := 403;
+    MsgCode_itm_Confirm         					:DINT := 404;
+    MsgCode_itm_Misfire         					:DINT := 405;
+    MsgCode_itm_RedButton       					:DINT := 406;
+    MsgCode_itm_SOF_Induct      					:DINT := 407;
+    MsgCode_itm_Heartbeat       					:DINT := 408;
+    MsgCode_itm_RecordStepPulse 					:DINT := 409;
+    MsgCode_itm_UnexOpen        					:DINT := 410;
+    MsgCode_itm_CalcCarrier1A   					:DINT := 411;
+    MsgCode_itm_SorterJam       					:DINT := 412;
+    MsgCode_itm_SeqNumFail      					:DINT := 413; // NEED TO TEST - as of 1/25/18
+    MsgCode_itm_IndStats        					:DINT := 414; 
+    MsgCode_itm_MisStats        					:DINT := 415; 
+	MsgCode_Itm_ZoneStats 							:DINT := 416; 
+	MsgCode_itm_CallCarrier							:DINT := 417;
+	MsgCode_itm_SortrakMotor						:DINT := 419;
+	MsgCode_itm_LabelMerge							:DINT := 420;
+	MsgCode_itm_KeyedInduction						:DINT := 421;
+	MsgCode_itm_DrivePPM							:DINT := 422;
+	MsgCode_itm_LLAIM_IND							:DINT := 423;
+	MsgCode_itm_LLAIM_DIV							:DINT := 424;
+	MsgCode_itm_LLAIM_CNF							:DINT := 425;
+	MsgCode_itm_LLAIM_MIS							:DINT := 426;
+	MsgCode_itm_Recirc         						:DINT := 427;
+	MsgCode_itm_ChuteStatus    						:DINT := 428;
+	MsgCode_itm_BadgeScan      						:DINT := 429;
+	MsgCode_itm_Start        						:DINT := 430;
+	MsgCode_itm_Stop        						:DINT := 431;
+	MsgCode_itm_CalcJams							:DINT := 434; //Used to send the updated OnDelay for ITM Jams
+
+    // Set up the ItmSort Event Codes
+	// -----------------------------------------------------------------------------
+    EvtCode_Itm_InductShift1 						:DINT := 4001;
+    EvtCode_Itm_InductShift2 						:DINT := 4002;
+    EvtCode_Itm_ZoneShift1 							:DINT := 4003;
+    EvtCode_Itm_ZoneShift2 							:DINT := 4004;
+    EvtCode_Itm_MisfireShift1 						:DINT := 4005;
+    EvtCode_Itm_MisfireShift2 						:DINT := 4006;
+    EvtCode_Itm_InductCarrier 						:DINT := 4007;
+    EvtCode_Itm_ZoneCarrier 						:DINT := 4008;
+    EvtCode_Itm_MisfireCarrier 						:DINT := 4009;
+    EvtCode_Itm_StepPulse 							:DINT := 4010;
+    EvtCode_Itm_UnknownItem 						:DINT := 4011;
+    EvtCode_Itm_DeadTray 							:DINT := 4012;
+    EvtCode_Itm_LateAssign 							:DINT := 4013;
+    EvtCode_Itm_InvalidLI 							:DINT := 4014;
+	EvtCode_Itm_HalfOpenLI							:DINT := 4015;
+	EvtCode_Itm_HBStressTest						:DINT := 4016;
+	EvtCode_Itm_WksLocShift1 						:DINT := 4017;
+    EvtCode_Itm_WksLocShift2 						:DINT := 4018;
+	EvtCode_Itm_DriveStop	 						:DINT := 4019;
+    EvtCode_Itm_CB_CarTimeout	 					:DINT := 4030;
+	EvtCode_Itm_CB_NetOverrun 						:DINT := 4031;
+	EvtCode_Itm_CB_Error 							:DINT := 4033;
+	EvtCode_Itm_CB_DivFail							:DINT := 4034;
+	EvtCode_Itm_CB_RecvFail							:DINT := 4035; 
+	EvtCode_Itm_CB_ParamMsgSent						:DINT := 4036;
+	EvtCode_Itm_CB_RunMsgSent						:DINT := 4037;
+	EvtCode_Itm_CB_MsgReturn						:DINT := 4038;
+	EvtCode_Itm_CB_Reconnect						:DINT := 4039;
+
+
+    //------------------------------------------------------------------------------------------------------------------------
+    // PandA Messages   nnnn-zzzz
+	MsgCode_PA_DestReq								:DINT := 281;
+	MsgCode_PA_Print								:DINT := 282;
+	MsgCode_PA_PrinterStatus						:DINT := 283;
+	MsgCode_PA_SfSepScan							:UINT := 284;
+	MsgCode_PA_LateAssign							:DINT := 285;
+	MsgCode_PA_Apply								:DINT := 286;
+	MsgCode_PA_AssignResult							:DINT := 287;
+	
+    //------------------------------------------------------------------------------------------------------------------------
+    // PandA events (2000-2999)    
+	Evt_PA_SfSepRespRecv							:UINT := 2840;
+	Evt_PandAApplicatorLow							:UINT := 2850;	//change this	
+	
+    //------------------------------------------------------------------------------------------------------------------------
+    // MDR Messages     nnnn-zzzz
+    
+    MsgCode_Mdr_DestReq								:UINT := 301;
+    MsgCode_Mdr_Confirm								:UINT := 302;
+    MsgCode_Mdr_Recirc								:UINT := 303;
+    MsgCode_Mdr_Tote_Scan							:UINT := 311;
+    MsgCode_Mdr_Tote_ScanError						:UINT := 312;
+    MsgCode_Mdr_Tote_Removed						:UINT := 313;
+        
+
+    //------------------------------------------------------------------------------------------------------------------------
+    // SkyFall Messages     nnnn-zzzz
+    MsgCode_Sf_Destreq		       					:DINT := 501;
+	MsgCode_Sf_Confirm		       					:DINT := 502;
+	MsgCode_Sf_Recirc		       					:DINT := 503;	
+    MsgCode_Sf_InductScan       					:DINT := 504;
+    MsgCode_Sf_InductRel        					:DINT := 505;	
+	MsgCode_Sf_SwInScan         					:DINT := 506;
+	MsgCode_Sf_SwInRel          					:DINT := 507;
+	MsgCode_Sf_SwInSlugRel							:DINT := 508;
+	MsgCode_Sf_SwInSlugCmp							:DINT := 509;
+    MsgCode_Sf_PackScan           					:DINT := 510;
+    MsgCode_Sf_PackSep1Rel        					:DINT := 511;
+    MsgCode_Sf_PackSep2Rel        					:DINT := 512;
+    MsgCode_Sf_ServiceScan       					:DINT := 514;
+	MsgCode_Sf_ServiceBtn       					:DINT := 515;
+	MsgCode_Sf_InductReset       					:DINT := 516;
+	MsgCode_Sf_InductCartonScan						:DINT := 517;
+	MsgCode_Sf_SwitchingDiag         				:DINT := 520;
+	MsgCode_Sf_USwScan         						:DINT := 521;
+	MsgCode_Sf_InductUserLog       					:DINT := 524;
+    //------------------------------------------------------------------------------------------------------------------------
+    // SkyFall Events
+	EvtCode_Sf_Ind_SepJam         					:DINT := 5001;
+	EvtCode_Sf_Ind_ScanTimeout         				:DINT := 5002;
+	EvtCode_Sf_SwIn_ScanTimeout        				:DINT := 5100;
+	EvtCode_Sf_SwIn_RescanNoShuttle    				:DINT := 5101;
+	EvtCode_Sf_SwIn_Release	        				:DINT := 5102;	
+	EvtCode_Sf_SwIn_Backwards        				:DINT := 5103;	
+	EvtCode_Sf_SwIn_SlugEarlier1       				:DINT := 5104;
+	EvtCode_Sf_SwIn_SlugEarlier2       				:DINT := 5105;
+	EvtCode_Sf_SwIn_SlugPrev	       				:DINT := 5106;
+	EvtCode_Sf_SwIn_SlugLater1       				:DINT := 5107;
+	EvtCode_Sf_SwIn_SlugLater2       				:DINT := 5108;
+	EvtCode_Sf_SwIn_SlugNotFound       				:DINT := 5109;	
+	EvtCode_Sf_SwIn_SlugNoRead       				:DINT := 5110;
+	EvtCode_Sf_SwIn_RelFail            				:DINT := 5111;
+    EvtCode_Sf_SwIn_RelFailHold            			:DINT := 5112;	
+	EvtCode_Sf_USw_DuplicateScan       				:DINT := 5160;	
+	EvtCode_Sf_Pack_RescanNoShuttle       			:DINT := 5201;
+	EvtCode_Sf_Pack_SepJam       					:DINT := 5202;
+	EvtCode_Sf_Pack_ScanTimeout		       			:DINT := 5203;	
+	EvtCode_Sf_BV_NewShuttle	       				:DINT := 5300;	
+	EvtCode_Sf_BreakawayLog1       					:DINT := 5600;
+	EvtCode_Sf_BreakawayLog2       					:DINT := 5601;
+	EvtCode_Sf_BreakawayLog3       					:DINT := 5602;	
+	EvtCode_Ferag_Skytrain_DriveFault       		:DINT := 5900;	
+	EvtCode_Ferag_Skytrain_ServiceMode       		:DINT := 5901;	
+	
+	//------------------------------------------------------------------------------------------------------------------------
+	// Stat Messages    601-700
+	MsgCode_Stat_MotorUpTime                        :DINT := 601;
+	MsgCode_Stat_ChuteHit                           :DINT := 602;   
+	MsgCode_Stat_ChuteMisfire                       :DINT := 603;
+	MsgCode_Stat_ChuteRecirc                        :DINT := 604;
+	MsgCode_Stat_ChuteSuspend                       :DINT := 605;
+	MsgCode_Stat_Jams                               :DINT := 606;
+	MsgCode_Stat_OutputOnTime                       :DINT := 607;
+	MsgCode_Stat_InputOnTime                        :DINT := 608;
+	MsgCode_Stat_DivertStatus						:DINT := 609;
+	
+	
+	
+	// TripWire is used to prevent multiple services of a like type from connecting to the same plc
+	// holds the host name of the service that is currently using it.
+	// when a service first come online it will clear the string value then wait 1000ms and check that the string is still clear.
+	// when the program is running it will write its host name into the value every time it interacts with the plc.
+	// this way we can see who is currely using it.
+	TripWire_DB2ADS         :STRING(256);
+	TripWire_ADS2DB         :STRING(256);
+	TripWire_ADS2WEB        :STRING(256);
+
+	// used to count the number of SQL exceptions the services have.
+	SQL_ExceptionFlag	:INT;
+	SQL_ExceptionCount	:INT;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

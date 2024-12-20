@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="MAIN" Id="{634c16e4-9cae-4701-9e3b-d0bbcebd34bb}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	nCounter			:INT;
+	sText				:STRING;
+	bFlag				:BOOL;
+	bQuit				:BOOL;
+	
+	step				:INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF bFlag THEN
+	step := step + 1;
+END_IF
+
+IF step > 20 THEN
+	//bFlag := FALSE;	// limit to 1 msg as a test
+	nCounter := nCounter + 1;
+	IF nCounter > 32000 THEN nCounter := 1; END_IF
+	
+	sMsg_SCP_Event(100,
+		nCounter, '',
+		0, '',
+		0, '',
+		0, '',
+		0, '',
+		0, '',
+		0, '');
+
+	step := 0;
+END_IF
+
+
+
+
+P800_Core_Messaging();
+
+IF bQuit THEN
+	bQuit := FALSE;
+	vMessages.Msgs_SCP.Pending := 'quit';
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="9" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="44" Count="8" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="63" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

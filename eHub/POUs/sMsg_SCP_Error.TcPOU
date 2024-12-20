@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="sMsg_SCP_Error" Id="{28e921cf-5bb2-4c10-928f-5e52499d10be}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION sMsg_SCP_Error : BOOL
+VAR_INPUT
+	Errors			:UDINT;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[sMsg_Add_Message(
+    Msgs_SCP,                  			// Buffer to use
+    2,                                  // Num Params
+    MsgCode_SCP_Error, '',              // param 1
+    Errors, '',                         // param 2
+    0, '',                              // param 3 
+    0, '',                              // param 4
+    0, '',                              // param 5
+    0, '',                              // param 6
+    0, '',                              // param 7
+    0, '',                              // param 8
+    0, '',                              // param 9
+    0, '',                              // param 10
+    0, '',                              // param 11
+    0, '',                              // param 12
+    0, '',                              // param 13
+    0, '',                              // param 14
+    0, '',                              // param 15
+    0, '',                              // param 16
+    0, '',                              // param 17
+    0, '',                              // param 18
+    0, '',                              // param 19
+    0, '');                             // param 20
+
+RETURN; ]]></ST>
+    </Implementation>
+    <LineIds Name="sMsg_SCP_Error">
+      <LineId Id="9" Count="23" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

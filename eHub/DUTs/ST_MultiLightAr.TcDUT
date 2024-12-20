@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="ST_MultiLightAr" Id="{eb51672b-17e9-4c48-9197-4618d2b88720}">
+    <Declaration><![CDATA[TYPE ST_MultiLightAr :
+STRUCT
+	Red				:UINT;
+	Yel				:UINT;
+	Grn				:UINT;
+	Blu				:UINT;
+	Rate			:UINT;
+	
+	Mode			:E_MultiLightMode;
+	Timer			:USINT;
+	ColorInProc		:BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

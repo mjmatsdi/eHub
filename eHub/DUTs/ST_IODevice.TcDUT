@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_IODevice" Id="{ded4962e-fd58-4116-a43b-472d5ac40832}">
+    <Declaration><![CDATA[TYPE ST_IODevice :
+STRUCT
+	DevID			:INT;
+	Typ				:E_IoDevice_ConnectionType;
+	Connected		:BOOL;		    // TRUE = Connected
+    StatusPt		:UINT;		    // analog input index for device state value
+    StatusBit       :UINT := 999;   // bit of the StatusPt to check. 999 if evaluating the whole StatusPt	
+	Status			:UINT;          // current status
+	PrevStatus		:UINT;          // status on the previous scan cycle
+    Timeout         :INT;           // for the "Timed" type, what is the timeout
+	TimeoutTmr      :INT;           // used internally for timing
+    
+	GoodVal			:UINT;		    // the value when the device is connected
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

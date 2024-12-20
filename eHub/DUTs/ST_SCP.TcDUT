@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <DUT Name="ST_SCP" Id="{51012620-477b-4a5b-9821-3827263cc74c}">
+    <Declaration><![CDATA[TYPE ST_SCP :
+STRUCT
+    IsConfigured          	:BOOL := FALSE;
+	//IsCfgOK               :BOOL := FALSE;
+	Init1stScan           	:BOOL;
+
+    IORemoveAllForces     	:BOOL := FALSE;
+
+	ScanCount             	:DINT;		// how many scan cycles have occured since startup
+	ScanCountRollover     	:DINT;		// how many times ScanCount has rolled over (99 days 10:05:34)
+
+	Tmr100msOscFlagLE     	:BOOL;
+	Tmr100msOscFlag       	:BOOL;
+	Tmr1sOscFlagLE        	:BOOL;
+	Tmr1sOscFlag          	:BOOL;
+	Rando				  	:DRAND;
+
+	LogicActiveOut        	:UINT;		// output that turns ON when the logic is running
+	FaultOut              	:UINT;		// output that turns ON if Error > 0
+
+	Error                 	:UDINT;		// Error bits
+	ErrorPrev             	:UDINT;		// Error bits
+	ErrorAck              	:BOOL;		// resets the Error variable
+	
+    DisableMessaging      	:BOOL := FALSE;
+	Heartbeat				:ST_Heartbeat;	//Heartbeat for SCP Buffer
+	
+	LinkLoss_ADS2DB			:BOOL := FALSE;
+	LinkLoss_DB2ADS			:BOOL := FALSE;
+	
+	IsLicensed				:BOOL := FALSE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

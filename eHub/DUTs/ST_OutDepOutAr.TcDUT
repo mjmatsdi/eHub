@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+  <DUT Name="ST_OutDepOutAr" Id="{cc0623af-e955-4052-adec-6cce3b9cc21c}">
+    <Declaration><![CDATA[TYPE ST_OutDepOutAr :
+STRUCT
+    State                       :BOOL := 0;
+    TestOutput                  :UINT := 0;         // output to monitor
+    Output                      :UINT := 0;         // output to control
+    OnDelay                     :UDINT := 0;        // configured on delay
+    OffDelay                    :UDINT := 0;        // configured off delay
+
+    OnCnt                       :UDINT := 0;        // how long the test output has been on
+    OffCnt                      :UDINT := 0;        // how long the test output has been off
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="sMsg_Add_Message" Id="{3ff0378b-78c7-4ca4-bc56-d131aafc0f78}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION sMsg_Add_Message : BOOL
+VAR_IN_OUT
+    pBuffer             :ST_Msg_Buffer;
+END_VAR
+VAR_INPUT
+    pNumParams          :UINT;		// the number of parameters to use, including the message code
+    pIntParam01         :DINT;		// set to the Message Code
+    pCharParam01        :STRING(450);        // default string length is 80 characters + 1 null termination character
+    pIntParam02         :DINT;
+    pCharParam02        :STRING(450);
+    pIntParam03         :DINT;
+    pCharParam03        :STRING(450);
+    pIntParam04         :DINT;
+    pCharParam04        :STRING(450);
+    pIntParam05         :DINT;
+    pCharParam05        :STRING(450);
+    pIntParam06         :DINT;
+    pCharParam06        :STRING(450);
+    pIntParam07         :DINT;
+    pCharParam07        :STRING(450);
+    pIntParam08         :DINT;
+    pCharParam08        :STRING(450);
+    pIntParam09         :DINT;
+    pCharParam09        :STRING(450);
+    pIntParam10         :DINT;
+    pCharParam10        :STRING(450);
+    pIntParam11         :DINT;
+    pCharParam11        :STRING(450);
+    pIntParam12         :DINT;
+    pCharParam12        :STRING(450);
+    pIntParam13         :DINT;
+    pCharParam13        :STRING(450);
+    pIntParam14         :DINT;
+    pCharParam14        :STRING(450);
+    pIntParam15         :DINT;
+    pCharParam15        :STRING(450);
+    pIntParam16         :DINT;
+    pCharParam16        :STRING(450);
+    pIntParam17         :DINT;
+    pCharParam17        :STRING(450);
+    pIntParam18         :DINT;
+    pCharParam18        :STRING(450);
+    pIntParam19         :DINT;
+    pCharParam19        :STRING(450);
+    pIntParam20         :DINT;
+    pCharParam20        :STRING(450);
+END_VAR
+VAR
+    str       			:STRING(450);
+    index     			:UDINT;
+	temp_buff			:STRING(4000);
+	msg_len				:UDINT;
+	free_space			:UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Msgs_Test_Num := Msgs_Test_Num + 1;
+
+// make sure there is something to do
+IF pNumParams < 1 OR SCP.DisableMessaging THEN
+    RETURN;
+END_IF
+
+// clear the temp buffer
+memset(ADR(temp_buff), 0, SIZEOF(temp_buff));
+
+// add a leading "<"
+concat2(ADR(temp_buff), ADR('<'), ADR(temp_buff), SIZEOF(temp_buff));
+
+// add the parameters
+IF pCharParam01[0] > 0 THEN
+	concat2(ADR(temp_buff), ADR(pCharParam01), ADR(temp_buff), SIZEOF(temp_buff));
+ELSE
+    str := DINT_TO_STRING(pIntParam01);
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF;
+
+IF pNumParams >= 2 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam02[0] > 0 THEN
+		str := pCharParam02;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam02);
+	END_IF;
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 3 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam03[0] > 0 THEN
+		str := pCharParam03;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam03);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 4 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam04[0] > 0 THEN
+		str := pCharParam04;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam04);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 5 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam05[0] > 0 THEN
+		str := pCharParam05;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam05);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 6 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam06[0] > 0 THEN
+		str := pCharParam06;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam06);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 7 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam07[0] > 0 THEN
+		str := pCharParam07;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam07);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 8 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam08[0] > 0 THEN
+		str := pCharParam08;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam08);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 9 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam09[0] > 0 THEN
+		str := pCharParam09;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam09);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 10 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam10[0] > 0 THEN
+		str := pCharParam10;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam10);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 11 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam11[0] > 0 THEN
+		str := pCharParam11;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam11);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 12 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam12[0] > 0 THEN
+		str := pCharParam12;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam12);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 13 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam13[0] > 0 THEN
+		str := pCharParam13;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam13);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 14 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam14[0] > 0 THEN
+		str := pCharParam14;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam14);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 15 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam15[0] > 0 THEN
+		str := pCharParam15;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam15);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 16 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam16[0] > 0 THEN
+		str := pCharParam16;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam16);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 17 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam17[0] > 0 THEN
+		str := pCharParam17;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam17);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 18 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam18[0] > 0 THEN
+		str := pCharParam18;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam18);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 19 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam19[0] > 0 THEN
+		str := pCharParam19;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam19);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+IF pNumParams >= 20 THEN
+	concat2(ADR(temp_buff), ADR(','), ADR(temp_buff), SIZEOF(temp_buff));
+	IF pCharParam20[0] > 0 THEN
+		str := pCharParam20;
+	ELSE
+    	str := DINT_TO_STRING(pIntParam20);
+	END_IF
+	concat2(ADR(temp_buff), ADR(str), ADR(temp_buff), SIZEOF(temp_buff));
+END_IF
+
+// add a trailing ">"
+concat2(ADR(temp_buff), ADR('>'), ADR(temp_buff), SIZEOF(temp_buff));
+
+// now make sure the new message will fit into whatever remaining space is in the pending buffer
+msg_len := LEN2(ADR(temp_buff));
+free_space := 4000 - LEN2(ADR(pBuffer.Pending));
+
+IF msg_len < free_space THEN
+	concat2(ADR(pBuffer.Pending), ADR(temp_buff), ADR(pBuffer.Pending), SIZEOF(pBuffer.Pending));
+ELSE
+	pBuffer.OverflowCount := pBuffer.OverflowCount + 1;
+	SCP.Error.ErrBit_Overflow := 1;
+END_IF
+
+RETURN;]]></ST>
+    </Implementation>
+    <LineIds Name="sMsg_Add_Message">
+      <LineId Id="1761" Count="224" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_EncAr" Id="{770a4940-8961-49bb-bae7-697014930c47}">
+    <Declaration><![CDATA[TYPE ST_EncAr :
+STRUCT
+    Tic                     :BOOL;
+	
+    Typ                     :E_EncoderType;
+    
+	ChA                     :INT;		// Channel A
+    ChB                     :INT;
+    ChC                     :INT;
+    ChD                     :INT;
+    ChE                     :INT;
+
+    LastSignal              :BYTE;      // used by quad encoders to track the last channel that signalled
+	LowByte					:UINT;      //analog input for incremental
+	HighByte				:UINT;		//analog input for incremental
+	Pos						:UINT;		//position
+	LPos					:UINT;		//last scan position
+	LFPos					:UINT;		//last forward position
+	Change					:INT;		//change of current scan cycle
+	LChange					:UINT;		//change of last scan
+	Rotation				:UINT;		//change from last Z input (ChE)
+	LRotation				:UINT;		//change of last full rotation
+	Backwards				:BOOL;		//previous motion was backwards
+	BackRollover			:USINT;		//number of times motion has rolled over backwards
+	FaultDetectActivate     :INT;       // input that when latched activates the fault detect logic (typically a motor aux)
+	FaultTimeout            :UDINT;		// if a tic does not occure within this timeout (x100ms) the encoder is flagged as faulted, max change for Incremental type
+    FaultTmr                :UDINT;
+	Fault_Reset				:INT;       // DI that resets the fault status
+    IsFaulted               :BOOL;
+	Rollover				:UINT;		// highest value the inc encoder can have before rolling over
+	
+	Motor					:INT;		// optional add-on for Timer type encoders. A tic will not be generated unless the motor is running.
+	
+	TicsPerSec				:UDINT;		// a count of the number of tics per second
+	TicsPerSecAcc			:UDINT;
+	FPMRatio				:REAL;		// a configured number needed to calculate the FPM
+	FPM						:UINT;		// calculated feet per minute
+	
+	PPI						:REAL;		// encoder pulses per inch. Optional.
+
+	IoConnIdx               :INT;       // the index into the IoDeviceAr so we can see if the encoder is connected
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

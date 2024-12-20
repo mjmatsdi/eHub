@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="sMsg_Add_Core_Heartbeat" Id="{76d27832-c0df-4599-b05f-c98ec6a425c6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION sMsg_Add_Core_Heartbeat : BOOL
+VAR_INPUT
+	nRespTime					:UDINT;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[sMsg_Add_Message(
+    Msgs_Log,                  			// Buffer to use
+    2,                                  // Num Params
+    MsgCode_SCP_Heartbeat, '',       	// param 1
+    nRespTime, '',					// param 2
+    0, '',              // param 3 
+    0, '',                       		// param 4
+    0, '',                             	// param 5
+    0, '',                              // param 6
+    0, '',                              // param 7
+    0, '',                              // param 8
+    0, '',                              // param 9
+    0, '',                              // param 10
+    0, '',                              // param 11
+    0, '',                              // param 12
+    0, '',                              // param 13
+    0, '',                              // param 14
+    0, '',                              // param 15
+    0, '',                              // param 16
+    0, '',                              // param 17
+    0, '',                              // param 18
+    0, '',                              // param 19
+    0, '');                             // param 20
+
+RETURN; ]]></ST>
+    </Implementation>
+    <LineIds Name="sMsg_Add_Core_Heartbeat">
+      <LineId Id="13" Count="23" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
