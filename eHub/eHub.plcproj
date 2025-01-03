@@ -111,6 +111,9 @@
     <Compile Include="POUs\sMsg_SCP_Event.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\sMsg_SCP_Event_Num.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />

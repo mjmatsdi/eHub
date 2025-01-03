@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="sMsg_SCP_Event_Num" Id="{a6d2921a-5328-4f52-98ad-5e1c1367b047}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION sMsg_SCP_Event_Num : INT
+VAR_INPUT
+	pEventCode			:DINT;
+	pI1					:DINT;
+	pI2					:DINT;
+	pI3					:DINT;
+	pI4					:DINT;
+	pI5					:DINT;
+	pI6					:DINT;
+	pI7					:DINT;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[sMsg_Add_Message(
+    Msgs_SCP,                  			// Buffer to use
+    9,                                  // Num Params
+    MsgCode_SCP_Event, '',       		// message code
+    pEventCode, '',						// event code
+    pI1, '',	                       	// param 1 
+    pI2, '',    	                   	// param 2
+    pI3, '',                            // param 3
+    pI4, '',                            // param 4
+    pI5, '',                            // param 5
+    pI6, '',                            // param 6
+    pI7, '',                            // param 7
+    0, '',                              // param 10
+    0, '',                              // param 11
+    0, '',                              // param 12
+    0, '',                              // param 13
+    0, '',                              // param 14
+    0, '',                              // param 15
+    0, '',                              // param 16
+    0, '',                              // param 17
+    0, '',                              // param 18
+    0, '',                              // param 19
+    0, '');                             // param 20
+
+RETURN; ]]></ST>
+    </Implementation>
+    <LineIds Name="sMsg_SCP_Event_Num">
+      <LineId Id="23" Count="23" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
